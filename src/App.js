@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import "./App.css";
+import Navbar from "./Navbar";
+import AutocompleteContainer from "./autocomplete/AutocompleteContainer";
+import File from "./fileExplorer/components/File";
+import Container from "./progress-bar/components/Container";
+import Board from "./tic-tac-toe/Board";
+//create a router configuration
+const routerConfig = createBrowserRouter([
+  {
+    path: "/",
+    element: <Navbar />,
+    children: [
+      { path: "/file", element: <File /> },
+      { path: "/board", element: <Board /> },
+      { path: "/progressBar", element: <Container /> },
+      { path: "/autocomplete", element: <AutocompleteContainer /> },
+    ],
+  },
+]);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" data-testid="main-page">
+      <RouterProvider router={routerConfig} />
     </div>
   );
 }
